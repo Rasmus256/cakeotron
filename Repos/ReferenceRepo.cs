@@ -18,7 +18,7 @@
             returnValue.Add(new ReferenceDate() { Description = "Frodos fødselsdag", Date = new DateTimeOffset(2015, 9, 7, 0, 0, 0, TimeSpan.Zero) });
             returnValue.Add(new ReferenceDate() { Description = "Morten Mikkelsens fødselsdag", Date = new DateTimeOffset(2015, 9, 7, 0, 0, 0, TimeSpan.Zero) });
             returnValue.Add(new ReferenceDate() { Description = "Idas fødselsdag", Date = new DateTimeOffset(1992, 7, 14, 0, 0, 0, TimeSpan.Zero) });
-            returnValue.Add(new ReferenceDate() { Description = "Ansat ved Bankdata", Date= new DateTimeOffset(2022,12,1,0,0,0,TimeSpan.Zero)})
+            returnValue.Add(new ReferenceDate() { Description = "Ansat ved Bankdata", Date= new DateTimeOffset(2022,12,1,0,0,0,TimeSpan.Zero)});
             return returnValue;
         }
     }
