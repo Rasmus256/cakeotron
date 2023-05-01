@@ -9,7 +9,7 @@ namespace CakeOTron.Service
         public static IEnumerable<Criteria> criteria()
         {
             var returnValue = new List<Criteria> { };
-            var SignificantNumbers = new HashSet<long> { 100, 1000, 10000, 10000000, 12345, 1234, 123, 12, 4321, 321, 54321, 10, 11, 12, 24, 36, 48, 12121, 21212, 12221, 21112 };
+            var SignificantNumbers = new HashSet<long> { 100, 1000, 10000, 10000000, 12345, 1234, 123, 12, 4321, 321, 54321, 10, 11, 12, 24, 36, 48, 12121, 21212, 12221, 21112, 12321,121,1234321,12345421};
             var digits = new List<char> { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
             List<string> significantStrings = new List<string> { };
             for (int i = 1; i < 10; i++)
