@@ -15,7 +15,7 @@ namespace CakeOTron.Controllers
             _logger = logger;
         }
 
-        [HttpGet(Name = "GetWeatherForecast")]
+        [HttpGet()]
         public IEnumerable<CakeReason> Get()
         {
             var criteria = CriteriaRepo.criteria();
@@ -69,6 +69,26 @@ namespace CakeOTron.Controllers
         public String Get()
         {
             return "Hello from cakeotron";
+        }
+    }
+    [ApiController]
+    [Route("/criteria")]
+    public class CakeController : ControllerBase
+    {
+        [HttpGet]
+        public IEnumerable<Criteria> Get()
+        {
+            return CriteriaRepo.criteria();
+        }
+    }
+    [ApiController]
+    [Route("/dates")]
+    public class ReferenceController : ControllerBase
+    {
+        [HttpGet]
+        public IEnumerable<ReferenceDate> Get()
+        {
+            return ReferenceRepo.references();
         }
     }
 }
