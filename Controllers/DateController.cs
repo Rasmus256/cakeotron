@@ -73,7 +73,7 @@ namespace CakeOTron.Controllers
     }
     [ApiController]
     [Route("/criteria")]
-    public class CakeController : ControllerBase
+    public class CriteriaController : ControllerBase
     {
         [HttpGet]
         public IEnumerable<Criteria> Get()
@@ -83,7 +83,7 @@ namespace CakeOTron.Controllers
     }
     [ApiController]
     [Route("/dates")]
-    public class ReferenceController : ControllerBase
+    public class RefrenceController : ControllerBase
     {
         [HttpGet]
         public IEnumerable<ReferenceDate> Get()
