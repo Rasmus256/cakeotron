@@ -20,9 +20,15 @@ namespace CakeOTron.Controllers
         public IEnumerable<CakeReason> Get()
         {
             var cacheKey = DateTime.Now.ToShortDateString();
+            foreach (var item in _cache.Keys.Except(new List<string>{cacheKey}))
+            {
+                _logger.LogInformation($"Removed stale result from cache for key {item}");
+                _cache.Remove(item);
+            }
             if (_cache.ContainsKey(cacheKey)) {
                 var v = _cache.GetValueOrDefault(cacheKey);
                 if(v != null) {
+                    _logger.LogInformation($"Found result in cache for key {cacheKey}");
                     return v;
                 }
             }
