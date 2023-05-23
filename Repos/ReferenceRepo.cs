@@ -7,6 +7,8 @@
             var returnValue = new List<ReferenceDate> { };
             returnValue.Add(new ReferenceDate() { Description = "RDP Birthday", Date = new DateTimeOffset(1991, 6, 20, 0, 0, 0, TimeSpan.Zero) });
             returnValue.Add(new ReferenceDate() { Description = "Maj Birthday", Date = new DateTimeOffset(1991, 5, 15, 0, 0, 0, TimeSpan.Zero) });
+            returnValue.Add(new ReferenceDate() { Description = "Mor Kirsten Birthday", Date = new DateTimeOffset(1961, 5, 23, 0, 0, 0, TimeSpan.Zero) });
+            returnValue.Add(new ReferenceDate() { Description = "Far Frank Birthday", Date = new DateTimeOffset(1960, 3, 25, 0, 0, 0, TimeSpan.Zero) });
             returnValue.Add(new ReferenceDate() { Description = "Alberte Birthday", Date = new DateTimeOffset(2017, 3, 4, 0, 0, 0, TimeSpan.Zero) });
             returnValue.Add(new ReferenceDate() { Description = "Gry Birthday", Date = new DateTimeOffset(2018, 12, 22, 0, 0, 0, TimeSpan.Zero) });
             returnValue.Add(new ReferenceDate() { Description = "Mathias Birthday", Date = new DateTimeOffset(1992, 4, 24, 0, 0, 0, TimeSpan.Zero) });
