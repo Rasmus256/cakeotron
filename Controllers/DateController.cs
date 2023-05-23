@@ -9,6 +9,7 @@ namespace CakeOTron.Controllers
     {
 
         private readonly ILogger<DateController> _logger;
+        private static Dictionary<string, IEnumerable<CakeReason>> _cache = new Dictionary<string, IEnumerable<CakeReason>>();
 
         public DateController(ILogger<DateController> logger)
         {
@@ -18,6 +19,13 @@ namespace CakeOTron.Controllers
         [HttpGet()]
         public IEnumerable<CakeReason> Get()
         {
+            var cacheKey = DateTime.Now.ToShortDateString();
+            if (_cache.ContainsKey(cacheKey)) {
+                var v = _cache.GetValueOrDefault(cacheKey);
+                if(v != null) {
+                    return v;
+                }
+            }
             var criteria = CriteriaRepo.criteria();
             var referenceDates = ReferenceRepo.references();
             var returnValue = new List<CakeReason> { };
@@ -57,6 +65,8 @@ namespace CakeOTron.Controllers
                     });
                 }
             }
+            
+            _cache.Add(cacheKey, returnValue);
             return returnValue;
         }
     }
