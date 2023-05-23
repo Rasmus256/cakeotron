@@ -10,17 +10,17 @@ namespace CakeOTron.Service
         {
             var returnValue = new List<Criteria> { };
             var SignificantNumbers = new HashSet<long> { 100, 1000, 10000, 10000000, 12345, 1234, 123, 12, 4321, 321, 54321, 10, 11, 12, 24, 36, 48, 12121, 21212, 12221, 21112, 12321,121,1234321,12345421};
-            var digits = new List<char> { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+            var digits = Enumerable.Range(0,10);
             List<string> significantStrings = new List<string> { };
             for (int i = 1; i < 10; i++)
             {
-                significantStrings.AddRange(digits.Select(p => new string(p, i)));
-                significantStrings.AddRange(digits.Select(p => p+ new string(p, i)));
+                significantStrings.AddRange(digits.Select(p => new string($"{p}"[0], i)));
+                significantStrings.AddRange(digits.Select(p => p+ new string($"{p}"[0], i)));
 
             }
-            for (int i = 0; i < digits.Count; i++)
+            for (int i = 0; i < digits.Count(); i++)
             {
-                for (int j = i; j < digits.Count; j++)
+                for (int j = i; j < digits.Count(); j++)
                 {
                     var sToAdd = String.Join("",digits.Skip(i).Take(j));
                     significantStrings.Add(sToAdd);
