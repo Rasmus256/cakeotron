@@ -44,7 +44,7 @@ namespace CakeOTron.Service
             returnValue.AddRange(SignificantNumbers.Select(p => new MinutesSince(p)).ToList());
             returnValue.AddRange(SignificantNumbers.Select(p => new SecondsSince(p)).ToList());
             returnValue.Add(new Anniversary());
-            returnValue.RemoveAll(item => item == null)
+            returnValue.RemoveAll(item => item == null);
             return returnValue;
         }
         public static IEnumerable<CriteriaForCurrentDate> criteriaNoDate()
