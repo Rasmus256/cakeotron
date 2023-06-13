@@ -116,7 +116,7 @@ namespace CakeOTron.Controllers
 
             _logger.LogInformation($"Initiated external call");
             HttpResponseMessage response = await client.GetAsync("http://cakeotron.cake.svc.cluster.local/criteria");
-            _logger.LogInformation(response.toString());
+            _logger.LogInformation(response);
             if (response.IsSuccessStatusCode)
             {
                 var json = await response.Content.ReadAsStringAsync();
