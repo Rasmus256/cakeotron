@@ -12,7 +12,7 @@ namespace CakeOTron.Service
             var digits = Enumerable.Range(0,10);
             for (int i = 1; i < 10; i++){
                 for (int j = 1; j<6; j++) {
-                    SignificantNumbers.Add(Math.Power(i,j));
+                    SignificantNumbers.Add(Math.Pow(i,j));
                 }
             }
             List<string> significantStrings = new List<string> { };
