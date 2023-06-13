@@ -121,7 +121,7 @@ namespace CakeOTron.Controllers
             {
                 var json = await response.Content.ReadAsStringAsync();
                 _logger.LogInformation(json);
-                return JsonConvert.DeserializeObject<List<Criteria>>(jsonString);
+                return JsonConvert.DeserializeObject<List<Criteria>>(json);
             }
             return new List<Criteria>();
         }
