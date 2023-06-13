@@ -11,7 +11,7 @@ namespace CakeOTron.Service
             var digits = Enumerable.Range(0,10);
             for (int i = 1; i < 10; i++){
                 for (int j = 1; j<6; j++) {
-                    SignificantNumbers.Add(int.Parse($"{i}"+new String('0', j));
+                    SignificantNumbers.Add(long.Parse($"{i}"+new String('0', j)));
                 }
             }
             List<string> significantStrings = new List<string> { };
