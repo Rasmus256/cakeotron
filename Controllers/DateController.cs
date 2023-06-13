@@ -1,5 +1,6 @@
 using CakeOTron.Service;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace CakeOTron.Controllers
 {
@@ -38,7 +39,7 @@ namespace CakeOTron.Controllers
             _logger.LogInformation($"About to check {referenceDates.Count()} dates against {criteria.Count()} criteria");
             foreach (var r in referenceDates) 
             {
-                foreach(var c in criteria)
+                foreach(var c in criteria.Where(crit => crit.MakesDateSpecial(r.Date)))
                 {
                     try
                     {
