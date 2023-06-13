@@ -111,7 +111,7 @@ namespace CakeOTron.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Criteria> Get()
+        public async IEnumerable<Criteria> Get()
         {
 
             _logger.LogInformation($"Initiated external call");
