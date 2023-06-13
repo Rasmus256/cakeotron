@@ -43,17 +43,11 @@ namespace CakeOTron.Controllers
                 {
                     try
                     {
-
-                        if (c.MakesDateSpecial(r.Date))
-                        {
-
                             returnValue.Add(new CakeReason
                             {
                                 ReferenceDate = r,
                                 Reason = c.Prettyreason
                             });
-
-                        }
                     }
                     catch (Exception _) { }
 
