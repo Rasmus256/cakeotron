@@ -118,7 +118,7 @@ namespace CakeOTron.Controllers
             _logger.LogInformation(response.toString());
             if (response.IsSuccessStatusCode)
             {
-                json = await response.Content.ReadAsStringAsync();
+                var json = await response.Content.ReadAsStringAsync();
                 _logger.LogInformation(json);
                 return JsonConvert.DeserializeObject<List<Criteria>>(jsonString);
             }
