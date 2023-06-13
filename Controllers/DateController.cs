@@ -1,7 +1,11 @@
 using CakeOTron.Service;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
-
+using System;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
 namespace CakeOTron.Controllers
 {
     [ApiController]
@@ -90,6 +94,35 @@ namespace CakeOTron.Controllers
         public IEnumerable<Criteria> Get()
         {
             return CriteriaRepo.criteria();
+        }
+    }
+    [ApiController]
+    [Route("/criteriafromsvc")]
+    public class CriteriaSvcController : ControllerBase
+    {
+        private readonly ILogger<CriteriaSvcController> _logger;
+        static HttpClient client = new HttpClient();
+
+        
+        public CriteriaSvcController(ILogger<CriteriaSvcController> logger)
+        {
+            _logger = logger;
+        }
+
+        [HttpGet]
+        public IEnumerable<Criteria> Get()
+        {
+
+            _logger.LogInformation($"Initiated external call");
+            HttpResponseMessage response = await client.GetAsync("http://cakeotron.cake.svc.cluster.local/criteria");
+            _logger.LogInformation(response.toString());
+            if (response.IsSuccessStatusCode)
+            {
+                json = await response.Content.ReadAsStringAsync();
+                _logger.LogInformation(json);
+                return json.DeserializeObject<List<Criteria>>(jsonString);
+            }
+            return new List<Criteria>();
         }
     }
     [ApiController]
