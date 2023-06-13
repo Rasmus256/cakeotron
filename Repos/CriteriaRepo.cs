@@ -4,7 +4,7 @@ namespace CakeOTron.Service
 {
     public class CriteriaRepo
     {
-        private static IEnumerable<Criteria> criteriaCache = new List<Criteria>();
+        private static List<Criteria> criteriaCache = new List<Criteria>();
         public static IEnumerable<Criteria> criteria()
         {
             var returnValue = criteriaCache;
