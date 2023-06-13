@@ -1,5 +1,4 @@
 using System.Linq;
-using System;
 
 namespace CakeOTron.Service
 {
@@ -12,7 +11,7 @@ namespace CakeOTron.Service
             var digits = Enumerable.Range(0,10);
             for (int i = 1; i < 10; i++){
                 for (int j = 1; j<6; j++) {
-                    SignificantNumbers.Add((long)Math.Pow(i,j));
+                    SignificantNumbers.Add(int.Parse($"{i}"+new String("0", j));
                 }
             }
             List<string> significantStrings = new List<string> { };
