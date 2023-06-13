@@ -98,31 +98,31 @@ namespace CakeOTron.Controllers
         }
     }
     [ApiController]
-    [Route("/criteriafromsvc")]
-    public class CriteriaSvcController : ControllerBase
+    [Route("/datesfromsvc")]
+    public class DatesSvcController : ControllerBase
     {
-        private readonly ILogger<CriteriaSvcController> _logger;
+        private readonly ILogger<DatesSvcController> _logger;
         static HttpClient client = new HttpClient();
 
         
-        public CriteriaSvcController(ILogger<CriteriaSvcController> logger)
+        public DatesSvcController(ILogger<DatesSvcController> logger)
         {
             _logger = logger;
         }
 
         [HttpGet]
-        public async Task<IEnumerable<Criteria>> Get()
+        public async Task<IEnumerable<ReferenceDate>> Get()
         {
 
             _logger.LogInformation($"Initiated external call");
-            HttpResponseMessage response = await client.GetAsync("http://cakeotron.cake.svc.cluster.local/criteria");
+            HttpResponseMessage response = await client.GetAsync("http://cakeotron.cake.svc.cluster.local/dates");
             if (response.IsSuccessStatusCode)
             {
                 var json = await response.Content.ReadAsStringAsync();
                 _logger.LogInformation(json);
-                return JsonConvert.DeserializeObject<List<Criteria>>(json);
+                return JsonConvert.DeserializeObject<List<ReferenceDate>>(json);
             }
-            return new List<Criteria>();
+            return new List<ReferenceDate>();
         }
     }
     [ApiController]
