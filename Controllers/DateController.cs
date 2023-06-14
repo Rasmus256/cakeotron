@@ -131,7 +131,7 @@ namespace CakeOTron.Controllers
             _logger.LogInformation($"Start get dates");
             d = ReferenceRepo.references();
             _logger.LogInformation($"Endget dates");
-            return d
+            return d;
             
         }
     }
