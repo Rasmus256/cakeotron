@@ -53,7 +53,7 @@ namespace CakeOTron.Controllers
                 }
             }
             var criteria = CriteriaRepo.criteria();
-            var referenceDates = GetDates();
+            var referenceDates = await GetDates();
             var returnValue = new List<CakeReason> { };
             _logger.LogInformation($"About to check {referenceDates.Count()} dates against {criteria.Count()} criteria");
             foreach (var r in referenceDates) 
