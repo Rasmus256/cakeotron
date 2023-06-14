@@ -119,10 +119,20 @@ namespace CakeOTron.Controllers
     [Route("/dates")]
     public class RefrenceController : ControllerBase
     {
+        private readonly ILogger<RefrenceController> _logger;
+        public RefrenceController(ILogger<RefrenceController> logger)
+        {
+            _logger = logger;
+        }
+        
         [HttpGet]
         public IEnumerable<ReferenceDate> Get()
         {
-            return ReferenceRepo.references();
+            _logger.LogInformation($"Start get dates");
+            d = ReferenceRepo.references();
+            _logger.LogInformation($"Endget dates");
+            return d
+            
         }
     }
 }
