@@ -28,11 +28,14 @@ namespace CakeOTron.Controllers
 
             _logger.LogInformation($"Initiated external call");
             HttpResponseMessage response = await client.GetAsync("http://cakeotron.cake.svc.cluster.local/dates");
+            _logger.LogInformation($"Finished external call");
             if (response.IsSuccessStatusCode)
             {
-                var json = await response.Content.ReadAsStringAsync();
+                var json = await response.Content.ReadAsString();
                 _logger.LogInformation(json);
-                return JsonConvert.DeserializeObject<List<ReferenceDate>>(json);
+                var r = JsonConvert.DeserializeObject<List<ReferenceDate>>(json);
+                _logger.LogInformation("Deserialized dates");
+                return r;
             }
             return new List<ReferenceDate>();
         }
