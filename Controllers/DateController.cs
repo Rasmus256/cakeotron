@@ -31,7 +31,7 @@ namespace CakeOTron.Controllers
             _logger.LogInformation($"Finished external call");
             if (response.IsSuccessStatusCode)
             {
-                var json = await response.Content.ReadAsString();
+                var json = await response.Content.ReadAsStringAsync();
                 _logger.LogInformation(json);
                 var r = JsonConvert.DeserializeObject<List<ReferenceDate>>(json);
                 _logger.LogInformation("Deserialized dates");
