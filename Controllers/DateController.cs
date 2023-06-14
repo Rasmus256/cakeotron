@@ -16,14 +16,28 @@ namespace CakeOTron.Controllers
 
         private readonly ILogger<DateController> _logger;
         private static Dictionary<string, IEnumerable<CakeReason>> _cache = new Dictionary<string, IEnumerable<CakeReason>>();
-
+        private static HttpClient client = new HttpClient();
+        
         public DateController(ILogger<DateController> logger)
         {
             _logger = logger;
         }
+        
+        public async Task<IEnumerable<ReferenceDate>> GetDates()
+        {
 
+            _logger.LogInformation($"Initiated external call");
+            HttpResponseMessage response = await client.GetAsync("http://cakeotron.cake.svc.cluster.local/dates");
+            if (response.IsSuccessStatusCode)
+            {
+                var json = await response.Content.ReadAsStringAsync();
+                _logger.LogInformation(json);
+                return JsonConvert.DeserializeObject<List<ReferenceDate>>(json);
+            }
+            return new List<ReferenceDate>();
+        }
         [HttpGet()]
-        public IEnumerable<CakeReason> Get()
+        public async Task<IEnumerable<CakeReason>> Get()
         {
             var cacheKey = DateTime.Now.ToShortDateString();
             foreach (var item in _cache.Keys.Except(new List<string>{cacheKey}))
@@ -39,7 +53,7 @@ namespace CakeOTron.Controllers
                 }
             }
             var criteria = CriteriaRepo.criteria();
-            var referenceDates = ReferenceRepo.references();
+            var referenceDates = GetDates();
             var returnValue = new List<CakeReason> { };
             _logger.LogInformation($"About to check {referenceDates.Count()} dates against {criteria.Count()} criteria");
             foreach (var r in referenceDates) 
@@ -97,34 +111,7 @@ namespace CakeOTron.Controllers
             return CriteriaRepo.criteria();
         }
     }
-    [ApiController]
-    [Route("/datesfromsvc")]
-    public class DatesSvcController : ControllerBase
-    {
-        private readonly ILogger<DatesSvcController> _logger;
-        static HttpClient client = new HttpClient();
-
-        
-        public DatesSvcController(ILogger<DatesSvcController> logger)
-        {
-            _logger = logger;
-        }
-
-        [HttpGet]
-        public async Task<IEnumerable<ReferenceDate>> Get()
-        {
-
-            _logger.LogInformation($"Initiated external call");
-            HttpResponseMessage response = await client.GetAsync("http://cakeotron.cake.svc.cluster.local/dates");
-            if (response.IsSuccessStatusCode)
-            {
-                var json = await response.Content.ReadAsStringAsync();
-                _logger.LogInformation(json);
-                return JsonConvert.DeserializeObject<List<ReferenceDate>>(json);
-            }
-            return new List<ReferenceDate>();
-        }
-    }
+    
     [ApiController]
     [Route("/dates")]
     public class RefrenceController : ControllerBase
