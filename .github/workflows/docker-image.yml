@@ -28,4 +28,4 @@ jobs:
         push: true
         tags: |
           rasmus256docker/cakeotron:${{github.run_number}}
-          rasmus256docker/cakeotron:latest
+          rasmus256docker/cakeotron:1.0.0
