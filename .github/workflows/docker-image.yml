@@ -26,4 +26,6 @@ jobs:
         file: Dockerfile
         context: .
         push: true
-        tags: rasmus256docker/cakeotron:${{github.run_number}}
+        tags: |
+          rasmus256docker/cakeotron:${{github.run_number}}
+          rasmus256docker/cakeotron:latest
