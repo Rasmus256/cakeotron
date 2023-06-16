@@ -28,7 +28,6 @@ async def get_dates():
     array.append({'Description' : "Bos fødselsdag", 'Date': datetime.datetime(1998, 2, 15)})
     array.append({'Description' : "Ansat ved Bankdata", 'Date': datetime.datetime(2022,12,1)})
     return array
-    
 
 @app.get("/healthz")
 def healthcheck():
