@@ -63,31 +63,26 @@ namespace CakeOTron.Controllers
             {
                 foreach(var c in criteria.Where(crit => crit.MakesDateSpecial(r.Date)))
                 {
-                    try
+                    returnValue.Add(new CakeReason
                     {
-                            returnValue.Add(new CakeReason
-                            {
-                                ReferenceDate = r,
-                                Reason = c.Prettyreason
-                            });
-                    }
-                    catch (Exception _) { }
-
+                        ReferenceDate = r,
+                        Reason = c.Prettyreason
+                    });
                 }
             };
             var criteriaForCurr = CriteriaRepo.criteriaNoDate();
             _logger.LogInformation($"About to check today against {criteria.Count()} criteria");
-            foreach (var c in criteriaForCurr)
-            {
-                if(c.MakesDateSpecial())
-                {
-                    returnValue.Add(new CakeReason
+            returnValue.AddRange(criteriaForCurr.Where(criteria => criteria.MakesDateSpecial())
+                .Select(c => 
                     {
-                        ReferenceDate = new ReferenceDate { Date = DateTimeOffset.UtcNow, Description = "Today" },
-                        Reason = c.Prettyreason
-                    });
-                }
-            }
+                        return new CakeReason
+                        {
+                            ReferenceDate = new ReferenceDate { Date = DateTimeOffset.UtcNow, Description = "Today" },
+                            Reason = c.Prettyreason
+                        };
+                    }
+                )
+            );
             
             _cache.Add(cacheKey, returnValue);
             return returnValue;

@@ -156,9 +156,7 @@ namespace CakeOTron.Service
 
         public override bool MakesDateSpecial(DateTimeOffset lookupDate)
         {
-            lastInvocation = lookupDate;
-            TimeSpan dateTimeOffset = lookupDate.Subtract(DateTimeOffset.UtcNow);
-            var v = ((long)dateTimeOffset.TotalDays) + units;
+            var v = DaysAway(lookupDate);
             return v != 0 && v <= 20 && v >= -20;
 
         }
