@@ -8,4 +8,11 @@ namespace CakeOTron
 
         public ReferenceDate ReferenceDate { get; set; }
     }
+
+    public class ReferenceDate
+    {
+        public DateTimeOffset Date { get; set; }
+
+        public string Description { get; set; }
+    }
 }

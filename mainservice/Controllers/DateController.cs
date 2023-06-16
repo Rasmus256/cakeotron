@@ -114,25 +114,4 @@ namespace CakeOTron.Controllers
             return CriteriaRepo.criteria();
         }
     }
-    
-    [ApiController]
-    [Route("/dates")]
-    public class RefrenceController : ControllerBase
-    {
-        private readonly ILogger<RefrenceController> _logger;
-        public RefrenceController(ILogger<RefrenceController> logger)
-        {
-            _logger = logger;
-        }
-        
-        [HttpGet]
-        public IEnumerable<ReferenceDate> Get()
-        {
-            _logger.LogInformation($"Start get dates");
-            var d = ReferenceRepo.references();
-            _logger.LogInformation($"Endget dates");
-            return d;
-            
-        }
-    }
 }
