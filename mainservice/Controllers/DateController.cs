@@ -27,7 +27,7 @@ namespace CakeOTron.Controllers
         {
 
             _logger.LogInformation($"Initiated external call");
-            HttpResponseMessage response = await client.GetAsync("http://cakeotron-dataservice.cake.svc.cluster.local/dates");
+            HttpResponseMessage response = await client.GetAsync("http://cakeotron-dateservice.cake.svc.cluster.local/dates");
             _logger.LogInformation($"Finished external call");
             if (response.IsSuccessStatusCode)
             {
