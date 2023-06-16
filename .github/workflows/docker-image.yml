@@ -23,8 +23,8 @@ jobs:
 
     - uses: docker/build-push-action@v4
       with:
-        file: Dockerfile
-        context: .
+        file: mainservice/Dockerfile
+        context: ./mainservice
         push: true
         tags: |
           rasmus256docker/cakeotron:${{github.run_number}}
