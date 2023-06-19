@@ -66,7 +66,7 @@ namespace CakeOTron.Controllers
                     returnValue.Add(new CakeReason
                     {
                         ReferenceDate = r,
-                        Reason = c.Prettyreason
+                        Reason = c.Prettyreason(r.Date)
                     });
                 }
             };
@@ -78,7 +78,7 @@ namespace CakeOTron.Controllers
                         return new CakeReason
                         {
                             ReferenceDate = new ReferenceDate { Date = DateTimeOffset.UtcNow, Description = "Today" },
-                            Reason = c.Prettyreason
+                            Reason = c.Prettyreason(r.Date)
                         };
                     }
                 )
