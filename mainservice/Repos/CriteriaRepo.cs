@@ -163,7 +163,7 @@ namespace CakeOTron.Service
         {
             get
             {
-                var offshoot = DaysAway(days);
+                var offshoot = DaysAway(units);
                 var msg = offshoot > 0 ? $"Will happen in {Math.Abs(offshoot)} days!" : $"Happened {Math.Abs(offshoot)} days ago!";
                 return $"This date was (almost) {units} days ago today! {msg}";
             }
