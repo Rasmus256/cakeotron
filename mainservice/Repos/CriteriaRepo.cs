@@ -169,7 +169,7 @@ namespace CakeOTron.Service
             }
         }
 
-        protected override string unitNamePlural => "days"
+        protected override string unitNamePlural => "days";
     }
 
     public class MonthsSince : Criteria
