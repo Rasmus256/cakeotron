@@ -159,7 +159,7 @@ namespace CakeOTron.Service
             return v != 0 && v <= 20 && v >= -20;
 
         }
-        public override string Prettyreason(DatetimeOffset lookupDate)
+        public override string Prettyreason(DateTimeOffset lookupDate)
         {
             var offshoot = DaysAway(lookupDate);
             var msg = offshoot > 0 ? $"Will happen in {Math.Abs(offshoot)} days!" : $"Happened {Math.Abs(offshoot)} days ago!";
@@ -228,7 +228,7 @@ namespace CakeOTron.Service
             return longest > 2;
 
         }
-        public override string Prettyreason(DateTimeOffset lookupDate) => $"Today's date contains more than 2 repeating decimals when formatted as {Format}!";
+        public string Prettyreason(DateTimeOffset lookupDate) => $"Today's date contains more than 2 repeating decimals when formatted as {Format}!";
     }
     public class IsPalindrome : CriteriaForCurrentDate
     {
@@ -244,6 +244,6 @@ namespace CakeOTron.Service
             return s2 == string.Join("", s2.Reverse());
 
         }
-        public override string Prettyreason(DateTimeOffset lookupDate) => $"Today's date is a palindrome when formatted as {Format}!"; 
+        public string Prettyreason(DateTimeOffset lookupDate) => $"Today's date is a palindrome when formatted as {Format}!"; 
     }
 }
