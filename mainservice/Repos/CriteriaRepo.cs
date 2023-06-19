@@ -146,7 +146,6 @@ namespace CakeOTron.Service
     {
 
         public FuzzydaysSince(long days) : base(days){}
-        private DateTimeOffset lastInvocation;
 
         public long DaysAway(DateTimeOffset lookupDate)
         {
@@ -164,13 +163,13 @@ namespace CakeOTron.Service
         {
             get
             {
-                var offshoot = DaysAway(lastInvocation);
+                var offshoot = DaysAway(days);
                 var msg = offshoot > 0 ? $"Will happen in {Math.Abs(offshoot)} days!" : $"Happened {Math.Abs(offshoot)} days ago!";
                 return $"This date was (almost) {units} days ago today! {msg}";
             }
         }
 
-        protected override string unitNamePlural => throw new NotImplementedException();
+        protected override string unitNamePlural => "days"
     }
 
     public class MonthsSince : Criteria
