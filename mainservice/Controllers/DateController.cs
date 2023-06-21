@@ -46,7 +46,7 @@ namespace CakeOTron.Controllers
                     return new CakeReason
                     {
                         ReferenceDate = r,
-                        Reason = c.Prettyreason
+                        Reason = c.Prettyreason(r.Date)
                     };
                 }));
             return returnValue;
