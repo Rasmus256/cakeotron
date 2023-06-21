@@ -39,6 +39,18 @@ namespace CakeOTron.Controllers
             }
             return new List<ReferenceDate>();
         }
+        private async Task<IEnumerable<CakeReason>> processReasons(IEnumerable<Criteria> criteria, ReferenceDate r) {
+            var returnValue = new List<CakeReason>{};
+            returnValue.AddRange(criteria.Where(crit => crit.MakesDateSpecial(r.Date)).Select(c => 
+                {
+                    return new CakeReason
+                    {
+                        ReferenceDate = r,
+                        Reason = c.Prettyreason
+                    };
+                }));
+            return returnValue;
+        }
         [HttpGet()]
         public async Task<IEnumerable<CakeReason>> Get()
         {
@@ -59,31 +71,16 @@ namespace CakeOTron.Controllers
             var referenceDates = await GetDates();
             var returnValue = new List<CakeReason> { };
             _logger.LogInformation($"About to check {referenceDates.Count()} dates against {criteria.Count()} criteria");
+            var tasks = new List<Task>{};
             foreach (var r in referenceDates) 
             {
-                foreach(var c in criteria.Where(crit => crit.MakesDateSpecial(r.Date)))
-                {
-                    returnValue.Add(new CakeReason
-                    {
-                        ReferenceDate = r,
-                        Reason = c.Prettyreason
-                    });
-                }
+                tasks.Add(processReasons(criteria, r).ContinueWith(async p => returnValue.AddRange(await p)));
             };
-            var criteriaForCurr = CriteriaRepo.criteriaNoDate();
-            _logger.LogInformation($"About to check today against {criteria.Count()} criteria");
-            returnValue.AddRange(criteriaForCurr.Where(criteria => criteria.MakesDateSpecial())
-                .Select(c => 
-                    {
-                        return new CakeReason
-                        {
-                            ReferenceDate = new ReferenceDate { Date = DateTimeOffset.UtcNow, Description = "Today" },
-                            Reason = c.Prettyreason
-                        };
-                    }
-                )
-            );
-            
+            var criteriaForCurr = CriteriaRepo.criteriaForToday();
+            _logger.LogInformation($"About to check today against {criteriaForCurr.Count()} criteria");
+            var referenceDate  = new ReferenceDate { Date = DateTimeOffset.UtcNow, Description = "Today" };
+            tasks.Add(processReasons(criteriaForCurr, referenceDate).ContinueWith(async p => returnValue.AddRange(await p)));
+            await Task.WhenAll(tasks);
             _cache.Add(cacheKey, returnValue);
             return returnValue;
         }

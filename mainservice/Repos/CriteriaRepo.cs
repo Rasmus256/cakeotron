@@ -49,9 +49,9 @@ namespace CakeOTron.Service
             returnValue.RemoveAll(item => item == null);
             return returnValue;
         }
-        public static IEnumerable<CriteriaForCurrentDate> criteriaNoDate()
+        public static IEnumerable<Criteria> criteriaForToday()
         {
-            var returnValue = new List<CriteriaForCurrentDate> { };
+            var returnValue = new List<Criteria> { };
             var dateFormats = new HashSet<string> {"yyyyMMdd","ddMMyyyy","MMddyyyy","yyyyddMM","yyyy", "yyyyMM", "MMyyyy", "ddMM", "MMdd"};
             returnValue.AddRange(dateFormats.Select(p => new IsRepeating(p)));
             returnValue.AddRange(dateFormats.Select(p => new IsPalindrome(p)));
@@ -74,14 +74,6 @@ namespace CakeOTron.Service
         public abstract bool MakesDateSpecial(DateTimeOffset lookupDate);
 
     }
-    public interface CriteriaForCurrentDate
-    {
-        string Prettyreason { get; }
-
-        public bool MakesDateSpecial();
-
-    }
-
     public class DaysSince : Criteria
     {
         public DaysSince(long days) : base(days){}
@@ -205,14 +197,13 @@ namespace CakeOTron.Service
         }
     }
 
-    public class IsRepeating : CriteriaForCurrentDate
+    public class IsRepeating : Criteria
     {
-        public IsRepeating(string Format) { this.Format = Format; }
+        public IsRepeating(string Format) : base(0) { this.Format = Format; }
 
         string Format = "";
-        public bool MakesDateSpecial()
+        public override bool MakesDateSpecial(DateTimeOffset lookupDate)
         {
-            var lookupDate = DateTimeOffset.UtcNow;
 
             var s2 = lookupDate.ToString(Format);
             char c = s2[0];
@@ -232,22 +223,21 @@ namespace CakeOTron.Service
             return longest > 2;
 
         }
-        public string Prettyreason { get => $"Today's date contains more than 2 repeating decimals when formatted as {Format}!"; }
+        protected override string unitNamePlural => throw new NotImplementedException();
+        public override string Prettyreason { get => $"Today's date contains more than 2 repeating decimals when formatted as {Format}!"; }
     }
-    public class IsPalindrome : CriteriaForCurrentDate
+    public class IsPalindrome : Criteria
     {
 
-        public IsPalindrome(string Format) { this.Format = Format; }
+        public IsPalindrome(string Format) : base(0) { this.Format = Format; }
 
         string Format = "";
-        public bool MakesDateSpecial()
+        protected override string unitNamePlural => throw new NotImplementedException();
+        public override bool MakesDateSpecial(DateTimeOffset lookupDate)
         {
-            var lookupDate = DateTimeOffset.UtcNow;
-
             var s2 = lookupDate.ToString(Format);
             return s2 == string.Join("", s2.Reverse());
-
         }
-        public string Prettyreason { get => $"Today's date is a palindrome when formatted as {Format}!"; }
+        public override string Prettyreason { get => $"Today's date is a palindrome when formatted as {Format}!"; }
     }
 }
