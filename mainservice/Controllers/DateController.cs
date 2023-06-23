@@ -29,7 +29,7 @@ namespace CakeOTron.Controllers
 
             if (response.IsSuccessStatusCode)
             {
-                return response.Content.ReadAsStringAsync().ContinueWith(p => JsonConvert.DeserializeObject<List<ReferenceDate>>(p));
+                return response.Content.ReadAsStringAsync().ContinueWith(async p => JsonConvert.DeserializeObject<List<ReferenceDate>>(await p));
             }
             return new List<ReferenceDate>();
         }
