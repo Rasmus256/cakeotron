@@ -37,8 +37,13 @@ namespace CakeOTron.Controllers
         }
         
         [HttpGet()]
-        public async Task<IEnumerable<CakeReason>> Get()
+        public async Task<IEnumerable<CakeReason>> Get(bool clearcache = false)
         {
+            var dateTask = GetDates();
+            if (clearcache)
+            {
+                _cache.Clear();
+            }
             var cacheKey = DateTime.Now.ToShortDateString();
             foreach (var item in _cache.Keys.Except(new List<string>{cacheKey}))
             {
@@ -52,7 +57,6 @@ namespace CakeOTron.Controllers
                     return v;
                 }
             }
-            var dateTask = GetDates();
             var criteria = CriteriaRepo.criteria();
             var referenceDates = await dateTask;
             var returnValue = new List<CakeReason> { };
