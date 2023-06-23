@@ -25,17 +25,11 @@ namespace CakeOTron.Controllers
         
         public async Task<IEnumerable<ReferenceDate>> GetDates()
         {
-
-            _logger.LogInformation($"Initiated external call");
             HttpResponseMessage response = await client.GetAsync("http://cakeotron-dateservice.cake.svc.cluster.local/dates");
-            _logger.LogInformation($"Finished external call");
+
             if (response.IsSuccessStatusCode)
             {
-                var json = await response.Content.ReadAsStringAsync();
-                _logger.LogInformation(json);
-                var r = JsonConvert.DeserializeObject<List<ReferenceDate>>(json);
-                _logger.LogInformation("Deserialized dates");
-                return r;
+                return response.Content.ReadAsStringAsync().ContinueWith(p => JsonConvert.DeserializeObject<List<ReferenceDate>>(p));
             }
             return new List<ReferenceDate>();
         }
