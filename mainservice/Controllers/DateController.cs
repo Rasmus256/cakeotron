@@ -51,6 +51,7 @@ namespace CakeOTron.Controllers
                 }));
             return returnValue;
         }
+        
         [HttpGet()]
         public async Task<IEnumerable<CakeReason>> Get()
         {
@@ -67,8 +68,9 @@ namespace CakeOTron.Controllers
                     return v;
                 }
             }
+            var dateTask = GetDates();
             var criteria = CriteriaRepo.criteria();
-            var referenceDates = await GetDates();
+            var referenceDates = await dateTask;
             var returnValue = new List<CakeReason> { };
             _logger.LogInformation($"About to check {referenceDates.Count()} dates against {criteria.Count()} criteria");
             var tasks = new List<Task>{};
@@ -94,16 +96,6 @@ namespace CakeOTron.Controllers
         public String Get()
         {
             return "Hello from cakeotron";
-        }
-    }
-    [ApiController]
-    [Route("/criteria")]
-    public class CriteriaController : ControllerBase
-    {
-        [HttpGet]
-        public IEnumerable<Criteria> Get()
-        {
-            return CriteriaRepo.criteria();
         }
     }
 }
