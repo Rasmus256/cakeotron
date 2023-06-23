@@ -35,6 +35,12 @@ namespace CakeOTron.Controllers
                 }));
             return returnValue;
         }
+
+        [HttpGet("/cake")]
+        public String HelloMessage()
+        {
+            return "Hello from cakeotron";
+        }
         
         [HttpGet()]
         public async Task<IEnumerable<CakeReason>> Get(bool clearcache = false)
@@ -73,17 +79,6 @@ namespace CakeOTron.Controllers
             await Task.WhenAll(tasks);
             _cache.Add(cacheKey, returnValue);
             return returnValue;
-        }
-    }
-
-    [ApiController]
-    [Route("/cake")]
-    public class CakeController : ControllerBase
-    {
-        [HttpGet]
-        public String Get()
-        {
-            return "Hello from cakeotron";
         }
     }
 }
