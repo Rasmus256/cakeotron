@@ -1,12 +1,6 @@
 using CakeOTron.Service;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
-using System;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+
 namespace CakeOTron.Controllers
 {
     [ApiController]
@@ -16,27 +10,19 @@ namespace CakeOTron.Controllers
 
         private readonly ILogger<DateController> _logger;
         private static Dictionary<string, IEnumerable<CakeReason>> _cache = new Dictionary<string, IEnumerable<CakeReason>>();
-        private static HttpClient client = new HttpClient();
+        private HttpClient client;
         
-        public DateController(ILogger<DateController> logger)
+        public DateController(ILogger<DateController> logger, HttpClient httpClient)
         {
             _logger = logger;
+            client = httpClient;
         }
         
         public async Task<IEnumerable<ReferenceDate>> GetDates()
         {
-            Task<HttpResponseMessage> response = client.GetAsync("https://cake.hosrasmus.hopto.org/dates");
-
-            Task<string> Content = await response.ContinueWith(async p => {
-                var r = await p;
-                if (r.IsSuccessStatusCode) {
-                    return await r.Content.ReadAsStringAsync();
-                }
-                return "[]";
-            });
-            return await await Content.ContinueWith(async p => JsonConvert.DeserializeObject<List<ReferenceDate>>(await p) );
-            
+            return await client.GetFromJsonAsync<List<ReferenceDate>>("https://cake.hosrasmus.hopto.org/dates");
         }
+        
         private async Task<IEnumerable<CakeReason>> processReasons(IEnumerable<Criteria> criteria, ReferenceDate r) {
             var returnValue = new List<CakeReason>{};
             returnValue.AddRange(criteria.Where(crit => crit.MakesDateSpecial(r.Date)).Select(c => 
