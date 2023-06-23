@@ -25,13 +25,17 @@ namespace CakeOTron.Controllers
         
         public async Task<IEnumerable<ReferenceDate>> GetDates()
         {
-            HttpResponseMessage response = await client.GetAsync("http://cakeotron-dateservice.cake.svc.cluster.local/dates");
+            Task<HttpResponseMessage> response = client.GetAsync("http://cakeotron-dateservice.cake.svc.cluster.local/dates");
 
-            if (response.IsSuccessStatusCode)
-            {
-                return await await response.Content.ReadAsStringAsync().ContinueWith(async p => JsonConvert.DeserializeObject<List<ReferenceDate>>(await p));
-            }
-            return new List<ReferenceDate>();
+            Task<string> Content = await response.ContinueWith(async p => {
+                var r = await p;
+                if (r.IsSuccessStatusCode) {
+                    return await r.Content.ReadAsStringAsync();
+                }
+                return "[]";
+            });
+            return await await Content.ContinueWith(async p => JsonConvert.DeserializeObject<List<ReferenceDate>>(await p) );
+            
         }
         private async Task<IEnumerable<CakeReason>> processReasons(IEnumerable<Criteria> criteria, ReferenceDate r) {
             var returnValue = new List<CakeReason>{};
