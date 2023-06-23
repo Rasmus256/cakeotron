@@ -25,7 +25,7 @@ namespace CakeOTron.Controllers
         
         public async Task<IEnumerable<ReferenceDate>> GetDates()
         {
-            Task<HttpResponseMessage> response = client.GetAsync("http://cakeotron-dateservice.cake.svc.cluster.local/dates");
+            Task<HttpResponseMessage> response = client.GetAsync("https://cake.hosrasmus.hopto.org/dates");
 
             Task<string> Content = await response.ContinueWith(async p => {
                 var r = await p;
