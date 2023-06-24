@@ -43,7 +43,9 @@ async def get_dates():
         {'Description': "Bos fødselsdag",
             'Date': datetime.datetime(1998, 2, 15)},
         {'Description': "Ansat ved Bankdata",
-            'Date': datetime.datetime(2022, 12, 1)}
+            'Date': datetime.datetime(2022, 12, 1)},
+        {'Description': "Frank og Kirsten Bryllupsdag",
+            'Date': datetime.datetime(1988, 6, 25)}
     ]
 
 
