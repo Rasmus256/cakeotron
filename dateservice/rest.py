@@ -7,7 +7,6 @@ import datetime
 resultcache = TTLCache(maxsize=30, ttl=60)
 app = FastAPI()
 
-
 @app.get("/dates")
 async def get_dates():
     return [
@@ -47,6 +46,7 @@ async def get_dates():
         {'Description': "Frank og Kirsten Bryllupsdag",
             'Date': datetime.datetime(1988, 6, 25)}
     ]
+
 
 
 @app.get("/healthz")
