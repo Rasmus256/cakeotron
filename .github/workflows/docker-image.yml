@@ -32,7 +32,7 @@ jobs:
         # Password or personal access token used to log against the Docker registry
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-    - if: steps.mainservice.outputs.runneeded == 'true'
+    - if: steps.mainservice-filter.outputs.runneeded == 'true'
       uses: docker/build-push-action@v4
       with:
         file: mainservice/Dockerfile
@@ -42,7 +42,7 @@ jobs:
           rasmus256docker/cakeotron:${{github.run_number}}
           rasmus256docker/cakeotron:1.0.0
 
-    - if: steps.dateservice.outputs.runneeded == 'true'
+    - if: steps.dateservice-filter.outputs.runneeded == 'true'
       uses: docker/build-push-action@v4
       with:
         file: dateservice/Dockerfile

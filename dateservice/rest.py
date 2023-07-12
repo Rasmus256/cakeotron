@@ -48,7 +48,6 @@ async def get_dates():
     ]
 
 
-
 @app.get("/healthz")
 def healthcheck():
     return None
