@@ -25,14 +25,11 @@ namespace CakeOTron.Controllers
         
         private async Task<IEnumerable<CakeReason>> processReasons(IEnumerable<Criteria> criteria, ReferenceDate r) {
             var returnValue = new List<CakeReason>{};
-            returnValue.AddRange(criteria.Where(crit => crit.MakesDateSpecial(r.Date)).Select(c => 
-                {
-                    return new CakeReason
+            returnValue.AddRange(criteria.Where(crit => crit.MakesDateSpecial(r.Date)).Select(c => new CakeReason
                     {
                         ReferenceDate = r,
                         Reason = c.Prettyreason(r.Date)
-                    };
-                }));
+                    }));
             return returnValue;
         }
 
@@ -57,10 +54,10 @@ namespace CakeOTron.Controllers
                 _cache.Remove(item);
             }
             if (_cache.ContainsKey(cacheKey)) {
-                var v = _cache.GetValueOrDefault(cacheKey);
-                if(v != null) {
+                
+                if(_cache.ContainsKey(cacheKey)) {
                     _logger.LogInformation($"Found result in cache for key {cacheKey}");
-                    return v;
+                    return _cache[cacheKey];
                 }
             }
             var criteria = CriteriaRepo.criteria();
@@ -70,12 +67,26 @@ namespace CakeOTron.Controllers
             var tasks = new List<Task>{};
             foreach (var r in referenceDates) 
             {
-                tasks.Add(processReasons(criteria, r).ContinueWith(async p => returnValue.AddRange(await p)));
+                tasks.Add(processReasons(criteria, r)
+                    .ContinueWith(async p => {
+                        var res = await p;
+                        lock(returnValue){
+                            returnValue.AddRange(res);
+                        }
+                    }
+                ));
             };
             var criteriaForCurr = CriteriaRepo.criteriaForToday();
             _logger.LogInformation($"About to check today against {criteriaForCurr.Count()} criteria");
             var referenceDate  = new ReferenceDate { Date = DateTimeOffset.UtcNow, Description = "Today" };
-            tasks.Add(processReasons(criteriaForCurr, referenceDate).ContinueWith(async p => returnValue.AddRange(await p)));
+                tasks.Add(processReasons(criteriaForCurr, referenceDate)
+                    .ContinueWith(async p => {
+                        var res = await p;
+                        lock(returnValue){
+                            returnValue.AddRange(res);
+                        }
+                    }
+                ));
             await Task.WhenAll(tasks);
             _cache.Add(cacheKey, returnValue);
             return returnValue;
