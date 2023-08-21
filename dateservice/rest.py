@@ -2,10 +2,26 @@ from fastapi import FastAPI
 from cachetools import TTLCache
 import asyncio
 import datetime
-
+from fastapi.responses import HTMLResponse
 
 resultcache = TTLCache(maxsize=30, ttl=60)
 app = FastAPI()
+
+response_404 = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Not Found</title>
+</head>
+<body>
+    <p>Have you checked your butthole?</p>
+</body>
+</html>
+"""
+    
+@app.exception_handler(404)
+async def custom_404_handler(_, __):
+    return HTMLResponse(response_404)
 
 @app.get("/dates")
 async def get_dates():
