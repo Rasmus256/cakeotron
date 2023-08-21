@@ -16,6 +16,7 @@ response_404 = """
 <body>
     <p>Have you checked your butthole?</p>
     <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/0yNZ63pUbmxX0xYzZEQr2j?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/--9kqhzQ-8Q?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </body>
 </html>
 """
