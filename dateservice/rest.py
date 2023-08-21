@@ -15,6 +15,7 @@ response_404 = """
 </head>
 <body>
     <p>Have you checked your butthole?</p>
+    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/0yNZ63pUbmxX0xYzZEQr2j?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
 </body>
 </html>
 """
