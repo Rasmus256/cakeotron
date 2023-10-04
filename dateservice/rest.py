@@ -12,6 +12,7 @@ response_404 = """
 <html lang="en">
 <head>
     <title>Not Found</title>
+    
 </head>
 <body>
     <p>Have you checked your butthole?</p>
