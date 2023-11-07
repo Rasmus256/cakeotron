@@ -36,7 +36,7 @@ namespace CakeOTron.Controllers
         [HttpGet("/cake")]
         public async Task<string> HelloMessage()
         {
-            return (await GetDates()).LongCount().ToString();
+            return "Test";
         }
         
         [HttpGet()]
