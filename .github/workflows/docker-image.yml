@@ -40,7 +40,7 @@ jobs:
         push: true
         tags: |
           rasmus256docker/cakeotron:${{github.run_number}}
-          rasmus256docker/cakeotron:1.0.0
+          rasmus256docker/cakeotron:1.0.1
 
     - if: steps.dateservice-filter.outputs.runneeded == 'true'
       uses: docker/build-push-action@v5
@@ -50,4 +50,4 @@ jobs:
         push: true
         tags: |
           rasmus256docker/cakeotron-dateservice:${{github.run_number}}
-          rasmus256docker/cakeotron-dateservice:1.0.0
+          rasmus256docker/cakeotron-dateservice:1.0.1
