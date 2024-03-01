@@ -18,13 +18,19 @@ namespace CakeOTron.Controllers
             client = httpClient;
         }
         
-        public async Task<IEnumerable<ReferenceDate>> GetDates()
+        public async Task<IEnumerable<Int>> GetDateIds() 
         {
-            return await client.GetFromJsonAsync<List<ReferenceDate>>("https://cake.hosrasmus.hopto.org/dates");
+            return await client.GetFromJsonAsync<List<Int>>("https://cake.hosrasmus.hopto.org/dates");
+        }
+
+        public async Task<ReferenceDate> GetDate(Int id)
+        {
+            return await client.GetFromJsonAsync<ReferenceDate>("https://cake.hosrasmus.hopto.org/date_by_id/"+id);
         }
         
-        private async Task<IEnumerable<CakeReason>> processReasons(IEnumerable<Criteria> criteria, ReferenceDate r) {
+        private async Task<IEnumerable<CakeReason>> processReasons(IEnumerable<Criteria> criteria, Int id) {
             var returnValue = new List<CakeReason>{};
+            ReferenceDate r = await GetDate(id)
             returnValue.AddRange(criteria.Where(crit => crit.MakesDateSpecial(r.Date)).Select(c => new CakeReason
                     {
                         ReferenceDate = r,
@@ -42,7 +48,7 @@ namespace CakeOTron.Controllers
         [HttpGet()]
         public async Task<IEnumerable<CakeReason>> Get(bool clearcache = false)
         {
-            var dateTask = GetDates();
+            var dateTask = GetDateIds();
             if (clearcache)
             {
                 _cache.Clear();
