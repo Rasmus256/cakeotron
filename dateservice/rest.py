@@ -65,7 +65,7 @@ dates = {1:{ 'Description': 'RDP Birthday',
 @app.get("/dates/{id}")
 async def get_date_by_id(id):
     global dates
-    return dates[id]
+    return dates[int(id)]
 
 @app.get("/dates")
 async def get_dates():

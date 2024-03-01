@@ -18,23 +18,26 @@ namespace CakeOTron.Controllers
             client = httpClient;
         }
         
-        public async Task<IEnumerable<Int>> GetDateIds() 
+        public async Task<IEnumerable<int>> GetDateIds() 
         {
-            return await client.GetFromJsonAsync<List<Int>>("https://cake.hosrasmus.hopto.org/dates");
+            return await client.GetFromJsonAsync<List<int>>("https://cake.hosrasmus.hopto.org/dates");
         }
 
-        public async Task<ReferenceDate> GetDate(Int id)
+        public async Task<ReferenceDate> GetDate(int id)
         {
             return await client.GetFromJsonAsync<ReferenceDate>("https://cake.hosrasmus.hopto.org/date_by_id/"+id);
         }
         
-        private async Task<IEnumerable<CakeReason>> processReasons(IEnumerable<Criteria> criteria, Int id) {
+        private async Task<IEnumerable<CakeReason>> processReasons(IEnumerable<Criteria> criteria, int id) {
+            ReferenceDate r = await GetDate(id);
+            return await processReasons(criteria, r);
+        }
+        private async Task<IEnumerable<CakeReason>> processReasons(IEnumerable<Criteria> criteria, ReferenceDate date) {
             var returnValue = new List<CakeReason>{};
-            ReferenceDate r = await GetDate(id)
-            returnValue.AddRange(criteria.Where(crit => crit.MakesDateSpecial(r.Date)).Select(c => new CakeReason
+            returnValue.AddRange(criteria.Where(crit => crit.MakesDateSpecial(date.Date)).Select(c => new CakeReason
                     {
-                        ReferenceDate = r,
-                        Reason = c.Prettyreason(r.Date)
+                        ReferenceDate = date,
+                        Reason = c.Prettyreason(date.Date)
                     }));
             return returnValue;
         }
