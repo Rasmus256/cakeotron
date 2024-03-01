@@ -25,7 +25,7 @@ namespace CakeOTron.Controllers
 
         public async Task<ReferenceDate> GetDate(int id)
         {
-            return await client.GetFromJsonAsync<ReferenceDate>("https://cake.hosrasmus.hopto.org/date_by_id/"+id);
+            return await client.GetFromJsonAsync<ReferenceDate>("https://cake.hosrasmus.hopto.org/dates/"+id);
         }
         
         private async Task<IEnumerable<CakeReason>> processReasons(IEnumerable<Criteria> criteria, int id) {
