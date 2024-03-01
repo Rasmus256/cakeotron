@@ -12,18 +12,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
-    - uses: dorny/paths-filter@v3
-      id: mainservice-filter
-      with:
-        filters: |
-          runneeded:
-            - ./mainservice/*
-    - uses: dorny/paths-filter@v3
-      id: dateservice-filter
-      with:
-        filters: |
-          runneeded:
-            - ./dateservice/*
     - name: Docker Login
       uses: docker/login-action@v3.0.0
       with:
@@ -32,8 +20,7 @@ jobs:
         # Password or personal access token used to log against the Docker registry
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-    - if: steps.mainservice-filter.outputs.runneeded == 'true'
-      uses: docker/build-push-action@v5
+    - uses: docker/build-push-action@v5
       with:
         file: mainservice/Dockerfile
         context: ./mainservice
@@ -42,8 +29,7 @@ jobs:
           rasmus256docker/cakeotron:${{github.run_number}}
           rasmus256docker/cakeotron:1.0.1
 
-    - if: steps.dateservice-filter.outputs.runneeded == 'true'
-      uses: docker/build-push-action@v5
+    - uses: docker/build-push-action@v5
       with:
         file: dateservice/Dockerfile
         context: ./dateservice
