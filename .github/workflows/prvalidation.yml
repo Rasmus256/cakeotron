@@ -26,7 +26,7 @@ jobs:
           runneeded:
             - ./dateservice/*
     - if: steps.mainservice-filter.outputs.runneeded == 'true'
-      uses: docker/build-push-action@v5
+      uses: docker/build-push-action@v6
       with:
         file: mainservice/Dockerfile
         context: ./mainservice
@@ -36,7 +36,7 @@ jobs:
           rasmus256docker/cakeotron:1.0.1
 
     - if: steps.dateservice-filter.outputs.runneeded == 'true'
-      uses: docker/build-push-action@v5
+      uses: docker/build-push-action@v6
       with:
         file: dateservice/Dockerfile
         context: ./dateservice
