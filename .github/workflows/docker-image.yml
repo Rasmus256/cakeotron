@@ -27,7 +27,6 @@ jobs:
         push: true
         tags: |
           rasmus256docker/cakeotron:${{github.run_number}}
-          rasmus256docker/cakeotron:1.0.1
 
     - uses: docker/build-push-action@v5
       with:
@@ -36,4 +35,24 @@ jobs:
         push: true
         tags: |
           rasmus256docker/cakeotron-dateservice:${{github.run_number}}
-          rasmus256docker/cakeotron-dateservice:1.0.1
+    - uses: docker/build-push-action@v5
+      with:
+        file: servicemesh-test/a/Dockerfile
+        context: ./servicemesh-test/a
+        push: true
+        tags: |
+          rasmus256docker/servicemesh-test-a:${{github.run_number}}
+    - uses: docker/build-push-action@v5
+      with:
+        file: servicemesh-test/b/Dockerfile
+        context: ./servicemesh-test/b
+        push: true
+        tags: |
+          rasmus256docker/servicemesh-test-b:${{github.run_number}}
+    - uses: docker/build-push-action@v5
+      with:
+        file: servicemesh-test/c/Dockerfile
+        context: ./servicemesh-test/c
+        push: true
+        tags: |
+          rasmus256docker/servicemesh-test-c:${{github.run_number}}
