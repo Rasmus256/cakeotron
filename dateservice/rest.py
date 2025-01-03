@@ -1,10 +1,8 @@
 from fastapi import FastAPI
-from cachetools import TTLCache
 import asyncio
 import datetime
 from fastapi.responses import HTMLResponse
 
-resultcache = TTLCache(maxsize=30, ttl=60)
 app = FastAPI()
 
 response_404 = """
