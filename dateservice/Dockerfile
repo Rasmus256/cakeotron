@@ -1,4 +1,4 @@
-FROM python:3.14.0a3-bookworm
+FROM python:3.14-bookworm
 
 COPY / .
 
