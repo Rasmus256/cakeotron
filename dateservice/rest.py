@@ -62,7 +62,9 @@ dates = {1:{ 'Description': 'RDP Birthday',
          19:{ 'Description': "Chilis fødselsdag",
             'Date': datetime.datetime(2024, 11, 2)},
          20:{ 'Description': "Chili kom hjem til os",
-            'Date': datetime.datetime(2025, 1, 10)}
+            'Date': datetime.datetime(2025, 1, 10)},
+         21:{ 'Description': "Brunsvigerens dag",
+            'Date': datetime.datetime(2025, 10, 9)}
 }
 @app.get("/dates/{id}")
 async def get_date_by_id(id):
