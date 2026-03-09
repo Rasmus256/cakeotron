@@ -1,9 +1,17 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:base"
+    "config:recommended"
   ],
   "packageRules": [
+    {
+      "matchManagers": ["github-actions"],
+      "matchDatasources": ["github-tags"],
+      "matchPackageNames": ["/^docker\\/.+/"],
+      "automerge": true,
+      "automergeType": "pr",
+      "automergeStrategy": "squash"
+    },
     {
       "matchPaths": ["**/*"],
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
