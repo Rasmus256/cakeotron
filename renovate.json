@@ -5,16 +5,29 @@
   ],
   "packageRules": [
     {
-      "matchManagers": ["github-actions"],
-      "matchDatasources": ["github-tags"],
-      "matchPackageNames": ["/^docker\\/.+/"],
+      "matchManagers": [
+        "github-actions"
+      ],
+      "matchDatasources": [
+        "github-tags"
+      ],
+      "matchPackageNames": [
+        "/^docker\\/.+/"
+      ],
       "automerge": true,
       "automergeType": "pr",
       "automergeStrategy": "squash"
     },
     {
-      "matchPaths": ["**/*"],
-      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "matchFileNames": [
+        "**/*"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
       "automerge": true
     }
   ]
