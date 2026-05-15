@@ -48,7 +48,7 @@ namespace CakeOTron.Controllers
             return "Test";
         }
         
-        [HttpGet(api)]
+        [HttpGet("api")]
         public async Task<IEnumerable<CakeReason>> Get(bool clearcache = false)
         {
             var dateTask = GetDateIds();
