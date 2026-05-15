@@ -66,12 +66,12 @@ dates = {1:{ 'Description': 'RDP Birthday',
          21:{ 'Description': "Brunsvigerens dag",
             'Date': datetime.datetime(2025, 10, 9)}
 }
-@app.get("/dates/{id}")
+@app.get("/api/dates/{id}")
 async def get_date_by_id(id):
     global dates
     return dates[int(id)]
 
-@app.get("/dates")
+@app.get("/api/dates")
 async def get_dates():
     global dates
     return list(dates.keys())

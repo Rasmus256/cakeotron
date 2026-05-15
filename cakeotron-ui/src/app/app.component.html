@@ -1,0 +1,32 @@
+<div class="page">
+  <header>
+    <h1>🍰 CakeOTron</h1>
+    <p class="lead">A whimsical view of every reason why today deserves cake.</p>
+  </header>
+
+  <section class="hero">
+    <div class="status">{{ headerText }}</div>
+    <p *ngIf="!loading && !error" class="lead">
+      The CakeOTron has found <strong>{{ reasons.length }}</strong> delicious reason{{ reasons.length === 1 ? '' : 's' }} to celebrate.
+    </p>
+    <p *ngIf="loading">Whisking together the current date, special dates, and cake-worthy criteria...</p>
+    <p *ngIf="error" class="error">{{ error }}</p>
+    <button class="refresh" (click)="loadReasons()" [disabled]="loading">
+      {{ loading ? 'Refreshing...' : 'Fetch fresh cake reasons' }}
+    </button>
+  </section>
+
+  <div class="reasons" *ngIf="!loading && !error">
+    <article class="reason-card" *ngFor="let group of groupedReasons">
+      <h3>{{ group.label }}</h3>
+      <div class="reason-badge">📅 {{ group.date }}</div>
+      <ul class="reason-list">
+        <li *ngFor="let reason of group.reasons">{{ reason }}</li>
+      </ul>
+    </article>
+  </div>
+
+  <footer>
+    <p>Powered by your CakeOTron backend service. Ask for cake again whenever the day feels special.</p>
+  </footer>
+</div>
