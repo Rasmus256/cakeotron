@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiBaseUrl: 'https://cake.hosrasmus.hopto.org'
+  apiBaseUrl: 'https://cake.hosrasmus.hopto.org/api'
 };

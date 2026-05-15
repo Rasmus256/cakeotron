@@ -4,7 +4,7 @@ A whimsical Angular front-end for the CakeOTron backend services.
 
 ## Local development
 
-This UI always connects to the external CakeOTron API at `https://cake.hosrasmus.hopto.org`.
+This UI always connects to the external CakeOTron API at `https://cake.hosrasmus.hopto.org/api`.
 
 1. From the repository root:
    ```bash
