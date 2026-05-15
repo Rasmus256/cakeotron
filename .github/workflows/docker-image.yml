@@ -56,3 +56,10 @@ jobs:
         push: true
         tags: |
           rasmus256docker/servicemesh-test-c:${{github.run_number}}
+    - uses: docker/build-push-action@bcafcacb16a39f128d818304e6c9c0c18556b85f # v7
+      with:
+        file: cakeotron-ui/Dockerfile
+        context: ./cakeotron-ui
+        push: true
+        tags: |
+          rasmus256docker/cakeotron-ui:${{github.run_number}}
