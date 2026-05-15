@@ -7,6 +7,7 @@ RUN npm run build
 
 FROM nginx:alpine AS runtime
 COPY --from=build /app/dist/cakeotron-ui /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY nginx-main.conf /etc/nginx/nginx.conf
+COPY nginx.conf /etc/nginx/conf.d/server.conf
 EXPOSE 80
-CMD ["nginx", "-g", "daemon off; user nginx;"]
+CMD ["nginx", "-g", "daemon off;"]
