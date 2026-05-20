@@ -55,11 +55,11 @@ export class AppComponent implements OnInit {
     this.loading = true;
     this.error = '';
     this.cakeService.getReasons().subscribe({
-      next: reasons => {
+      next: (reasons: any) => {
         this.reasons = reasons ?? [];
         this.loading = false;
       },
-      error: err => {
+      error: (err: any) => {
         this.loading = false;
         this.error = 'Could not reach the CakeOTron API. Make sure your mainservice is running and reachable.';
         console.error(err);
