@@ -25,6 +25,30 @@ jobs:
         filters: |
           runneeded:
             - ./dateservice/*
+    - uses: dorny/paths-filter@ceb8a2b8f2d89434be7ff52d3de7ec3738c5cc9d # v4
+      id: servicemesh-a-filter
+      with:
+        filters: |
+          runneeded:
+            - ./servicemesh-test/a/*
+    - uses: dorny/paths-filter@ceb8a2b8f2d89434be7ff52d3de7ec3738c5cc9d # v4
+      id: servicemesh-b-filter
+      with:
+        filters: |
+          runneeded:
+            - ./servicemesh-test/b/*
+    - uses: dorny/paths-filter@ceb8a2b8f2d89434be7ff52d3de7ec3738c5cc9d # v4
+      id: servicemesh-c-filter
+      with:
+        filters: |
+          runneeded:
+            - ./servicemesh-test/c/*
+    - uses: dorny/paths-filter@ceb8a2b8f2d89434be7ff52d3de7ec3738c5cc9d # v4
+      id: cakeotron-ui-filter
+      with:
+        filters: |
+          runneeded:
+            - ./cakeotron-ui/*
     - if: steps.mainservice-filter.outputs.runneeded == 'true'
       uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7
       with:
@@ -44,3 +68,39 @@ jobs:
         tags: |
           rasmus256docker/cakeotron-dateservice:${{github.run_number}}
           rasmus256docker/cakeotron-dateservice:1.0.1
+
+    - if: steps.servicemesh-a-filter.outputs.runneeded == 'true'
+      uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7
+      with:
+        file: servicemesh-test/a/Dockerfile
+        context: ./servicemesh-test/a
+        push: false
+        tags: |
+          rasmus256docker/servicemesh-test-a:${{github.run_number}}
+
+    - if: steps.servicemesh-b-filter.outputs.runneeded == 'true'
+      uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7
+      with:
+        file: servicemesh-test/b/Dockerfile
+        context: ./servicemesh-test/b
+        push: false
+        tags: |
+          rasmus256docker/servicemesh-test-b:${{github.run_number}}
+
+    - if: steps.servicemesh-c-filter.outputs.runneeded == 'true'
+      uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7
+      with:
+        file: servicemesh-test/c/Dockerfile
+        context: ./servicemesh-test/c
+        push: false
+        tags: |
+          rasmus256docker/servicemesh-test-c:${{github.run_number}}
+
+    - if: steps.cakeotron-ui-filter.outputs.runneeded == 'true'
+      uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7
+      with:
+        file: cakeotron-ui/Dockerfile
+        context: ./cakeotron-ui
+        push: false
+        tags: |
+          rasmus256docker/cakeotron-ui:${{github.run_number}}
