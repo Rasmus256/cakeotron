@@ -1,1 +1,471 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHICKEN COOP MARKET - Premium Poultry Emporium 1996</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+            background: #FFCC00 url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect fill="%23FFCC00" width="100" height="100"/><circle cx="10" cy="10" r="2" fill="%23FF6600"/><circle cx="30" cy="40" r="2" fill="%23FF6600"/><circle cx="60" cy="20" r="2" fill="%23FF6600"/><circle cx="80" cy="60" r="2" fill="%23FF6600"/></svg>');
+            color: #000;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(90deg, #FF00FF, #00FFFF);
+            border: 5px solid #000;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: 5px 5px 0px #FF6600;
+            transform: skew(-2deg);
+        }
+        
+        h1 {
+            font-size: 3em;
+            color: #FFF;
+            text-shadow: 3px 3px 0px #000;
+            font-weight: bold;
+            margin: 10px 0;
+            animation: blink 1s infinite;
+        }
+        
+        .subtitle {
+            font-size: 1.2em;
+            color: #FFD700;
+            font-style: italic;
+            margin: 5px 0;
+        }
+        
+        @keyframes blink {
+            0%, 49%, 100% { opacity: 1; }
+            50%, 99% { opacity: 0.7; }
+        }
+        
+        .marquee {
+            background: #FF0099;
+            color: #FFF;
+            padding: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+            overflow: hidden;
+            white-space: nowrap;
+            border: 3px solid #000;
+            margin-bottom: 20px;
+        }
+        
+        .marquee-text {
+            display: inline-block;
+            animation: scroll 10s linear infinite;
+        }
+        
+        @keyframes scroll {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .nav-btn {
+            background: #00FF00;
+            border: 3px solid #000;
+            padding: 10px 20px;
+            font-family: 'Comic Sans MS', cursive;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transform: rotate(-2deg);
+            box-shadow: 3px 3px 0px #000;
+            transition: all 0.1s;
+        }
+        
+        .nav-btn:hover {
+            background: #FF00FF;
+            color: #FFF;
+            transform: rotate(2deg) scale(1.1);
+            box-shadow: 5px 5px 0px #000;
+        }
+        
+        .nav-btn:active {
+            box-shadow: 1px 1px 0px #000;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .product-card {
+            background: #CCFFFF;
+            border: 4px solid #000;
+            padding: 15px;
+            transform: rotate(1deg);
+            box-shadow: 4px 4px 0px #FF0099;
+            transition: all 0.2s;
+        }
+        
+        .product-card:nth-child(even) {
+            background: #FFCCFF;
+            box-shadow: 4px 4px 0px #00FF00;
+            transform: rotate(-1deg);
+        }
+        
+        .product-card:nth-child(3n) {
+            background: #FFFFCC;
+            box-shadow: 4px 4px 0px #FF6600;
+        }
+        
+        .product-card:hover {
+            transform: scale(1.05) rotate(0deg);
+            box-shadow: 6px 6px 0px #000;
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 200px;
+            border: 3px solid #000;
+            margin-bottom: 10px;
+            background: #FFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        
+        .product-name {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #000;
+        }
+        
+        .product-desc {
+            font-size: 0.9em;
+            margin-bottom: 10px;
+            line-height: 1.4;
+            color: #333;
+        }
+        
+        .product-price {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #FF0000;
+            margin-bottom: 10px;
+            text-decoration: underline;
+        }
+        
+        .buy-btn {
+            background: #FF6600;
+            border: 3px solid #000;
+            padding: 10px 15px;
+            font-family: 'Comic Sans MS', cursive;
+            font-size: 0.9em;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transform: rotate(-1deg);
+            box-shadow: 2px 2px 0px #000;
+            transition: all 0.1s;
+        }
+        
+        .buy-btn:hover {
+            background: #FFCC00;
+            transform: rotate(1deg);
+            box-shadow: 3px 3px 0px #000;
+        }
+        
+        .buy-btn:active {
+            box-shadow: 1px 1px 0px #000;
+        }
+        
+        .footer {
+            background: #000;
+            color: #00FF00;
+            border: 3px solid #00FF00;
+            padding: 15px;
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.9em;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .ascii-art {
+            font-family: 'Courier New', monospace;
+            white-space: pre;
+            font-size: 0.8em;
+            line-height: 1;
+            margin: 10px 0;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: #FF0000;
+            color: #FFF;
+            padding: 5px 10px;
+            border: 2px solid #000;
+            font-weight: bold;
+            margin-bottom: 8px;
+            transform: rotate(-5deg);
+            font-size: 0.9em;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+        }
+        
+        .modal-content {
+            background: #FFFF00;
+            border: 5px solid #000;
+            margin: 10% auto;
+            padding: 20px;
+            max-width: 500px;
+            box-shadow: 10px 10px 0px #FF0099;
+        }
+        
+        .close {
+            color: #000;
+            float: right;
+            font-size: 2em;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close:hover {
+            color: #FF0000;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="ascii-art">
+   ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+      CHICKEN COOP MARKET v1.0
+   ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+        </div>
+        <h1>🐔 CLUCKIN' DEALS 🐔</h1>
+        <div class="subtitle">Your Premier Source for Quality Poultry Since 1996</div>
+    </header>
+    
+    <div class="marquee">
+        <span class="marquee-text">★ MEGA CHICKEN SALE! Get Premium Breeds at Unbeatable Prices! FREE SHIPPING on orders over $500! 🐓 ★ EXCLUSIVE RARE BREEDS AVAILABLE NOW! ★ LIMITED INVENTORY - ORDER TODAY! ★</span>
+    </div>
+    
+    <div class="container">
+        <div class="nav-buttons">
+            <button class="nav-btn" onclick="filterProducts('all')">🐔 ALL CHICKENS</button>
+            <button class="nav-btn" onclick="filterProducts('layers')">🥚 LAYERS</button>
+            <button class="nav-btn" onclick="filterProducts('meat')">🍗 MEAT BIRDS</button>
+            <button class="nav-btn" onclick="filterProducts('exotic')">✨ EXOTIC</button>
+            <button class="nav-btn" onclick="showCart()">🛒 MY CART</button>
+        </div>
+        
+        <div class="products-grid" id="products">
+            <!-- Products will be inserted here -->
+        </div>
+    </div>
+    
+    <div class="footer">
+        <div>CHICKEN COOP MARKET™ - Est. 1996</div>
+        <div>█████████████████████████████████████</div>
+        <div>Customer Service: 1-800-CLUCK-ME | FAQ | Returns | Poultry Care Tips</div>
+        <div>⚡ BEST CHICKENS ON THE INTERNET ⚡</div>
+        <div style="margin-top: 10px; font-size: 0.8em;">
+            HTML5 Poultry Marketplace™ | JavaScript Enabled | Best Viewed at 800x600 | 56k Modem Compatible
+        </div>
+    </div>
+    
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeCart()">&times;</span>
+            <h2>🛒 Shopping Cart</h2>
+            <div id="cartItems"></div>
+            <div style="margin-top: 20px; text-align: center;">
+                <button class="buy-btn" onclick="checkout()">Proceed to Checkout →</button>
+                <button class="buy-btn" onclick="closeCart()" style="margin-top: 10px;">Continue Shopping</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const cart = [];
+        
+        const products = [
+            {
+                id: 1,
+                name: "Red Rhode Island",
+                category: "layers",
+                desc: "Excellent layer - produces 250+ brown eggs annually!",
+                price: "$45.99",
+                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect fill='%23FFF5E1' width='200' height='200'/%3E%3Ccircle cx='100' cy='80' r='35' fill='%23CC3333'/%3E%3Cellipse cx='100' cy='140' r='30' ry='35' fill='%23994433'/%3E%3Ccircle cx='120' cy='65' r='8' fill='%23FFD700'/%3E%3Cpolygon points='105,55 110,50 108,58' fill='%23FF8C00'/%3E%3Cpolygon points='100,160 95,180 105,180' fill='%23808080'/%3E%3Cpolygon points='105,160 100,180 110,180' fill='%23808080'/%3E%3C/svg%3E",
+                badge: "BEST SELLER"
+            },
+            {
+                id: 2,
+                name: "Silkie Bantam",
+                category: "exotic",
+                desc: "Fluffy and broody - perfect mothers! Fuzzy feet included!",
+                price: "$38.50",
+                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect fill='%23FFF5E1' width='200' height='200'/%3E%3Ccircle cx='100' cy='70' r='40' fill='%23D3D3D3'/%3E%3Cellipse cx='100' cy='140' r='35' ry='40' fill='%23C0C0C0'/%3E%3Ccircle cx='125' cy='60' r='10' fill='%23FFD700'/%3E%3Cpolygon points='110,50 115,45 113,53' fill='%23FF8C00'/%3E%3Ccircle cx='90' cy='145' r='8' fill='%23D3D3D3'/%3E%3Ccircle cx='110' cy='150' r='8' fill='%23D3D3D3'/%3E%3C/svg%3E",
+                badge: "RARE"
+            },
+            {
+                id: 3,
+                name: "Buff Orpington",
+                category: "layers",
+                desc: "Broody, friendly, and excellent mothers. Golden plumage!",
+                price: "$52.00",
+                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect fill='%23FFF5E1' width='200' height='200'/%3E%3Ccircle cx='100' cy='75' r='38' fill='%23FFB84D'/%3E%3Cellipse cx='100' cy='145' r='32' ry='38' fill='%23FF9500'/%3E%3Ccircle cx='120' cy='65' r='9' fill='%23FFD700'/%3E%3Cpolygon points='108,55 113,50 111,58' fill='%23FF4500'/%3E%3Cpolygon points='98,160 92,180 104,180' fill='%23808080'/%3E%3Cpolygon points='102,160 96,180 108,180' fill='%23808080'/%3E%3C/svg%3E",
+                badge: "FRIENDLY"
+            },
+            {
+                id: 4,
+                name: "Wyandotte Gold",
+                category: "layers",
+                desc: "Hardy winter layer with beautiful laced feathering!",
+                price: "$48.99",
+                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect fill='%23FFF5E1' width='200' height='200'/%3E%3Ccircle cx='100' cy='78' r='36' fill='%23D4AF37'/%3E%3Cellipse cx='100' cy='142' r='30' ry='36' fill='%23B8860B'/%3E%3Ccircle cx='120' cy='65' r='8' fill='%23FFD700'/%3E%3Cpolygon points='106,55 111,50 109,58' fill='%23FF6347'/%3E%3Ctext x='100' y='85' font-size='8' fill='%23333' text-anchor='middle'%3E✦✦✦✦✦%3C/text%3E%3C/svg%3E",
+                badge: "HARDY"
+            },
+            {
+                id: 5,
+                name: "Cornish Rooster",
+                category: "meat",
+                desc: "Muscular meat bird with quick growth rate. Premium quality!",
+                price: "$34.50",
+                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect fill='%23FFF5E1' width='200' height='200'/%3E%3Ccircle cx='100' cy='85' r='32' fill='%23654321'/%3E%3Cellipse cx='100' cy='150' r='28' ry='33' fill='%23552200'/%3E%3Ccircle cx='118' cy='72' r='9' fill='%23FFD700'/%3E%3Cpolygon points='105,62 112,56 110,65' fill='%23FF4500' stroke='%23000' stroke-width='1'/%3E%3Cpolygon points='95,155 88,175 102,175' fill='%23808080'/%3E%3Cpolygon points='105,155 98,175 112,175' fill='%23808080'/%3E%3C/svg%3E",
+                badge: "MUSCULAR"
+            },
+            {
+                id: 6,
+                name: "Cochin Roo",
+                category: "exotic",
+                desc: "Super fluffy Cochin! Feathered feet and broody personality!",
+                price: "$55.75",
+                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect fill='%23FFF5E1' width='200' height='200'/%3E%3Ccircle cx='100' cy='65' r='42' fill='%238B4513'/%3E%3Cellipse cx='100' cy='145' r='38' ry='42' fill='%236B3410'/%3E%3Ccircle cx='125' cy='55' r='11' fill='%23FFD700'/%3E%3Cpolygon points='112,48 118,42 116,51' fill='%23FF6347'/%3E%3Ccircle cx='85' cy='150' r='10' fill='%238B4513'/%3E%3Ccircle cx='115' cy='155' r='10' fill='%238B4513'/%3E%3C/svg%3E",
+                badge: "FLUFF KING"
+            },
+            {
+                id: 7,
+                name: "Leghorn White",
+                category: "layers",
+                desc: "High production layer - 300+ white eggs per year!",
+                price: "$32.00",
+                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect fill='%23FFF5E1' width='200' height='200'/%3E%3Ccircle cx='100' cy='80' r='33' fill='%23FFFFFF' stroke='%23000' stroke-width='1'/%3E%3Cellipse cx='100' cy='140' r='28' ry='34' fill='%23F5F5F5' stroke='%23000' stroke-width='1'/%3E%3Ccircle cx='120' cy='68' r='8' fill='%23FFD700'/%3E%3Cpolygon points='106,56 111,51 109,59' fill='%23FF8C00'/%3E%3Cpolygon points='98,158 92,175 104,175' fill='%23FF8C00'/%3E%3Cpolygon points='102,158 96,175 108,175' fill='%23FF8C00'/%3E%3C/svg%3E",
+                badge: "TOP LAYER"
+            },
+            {
+                id: 8,
+                name: "Brahma Blue",
+                category: "exotic",
+                desc: "GIANT breed! Over 10 lbs! Docile and broody. Pure awesomeness!",
+                price: "$62.99",
+                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect fill='%23FFF5E1' width='200' height='200'/%3E%3Ccircle cx='100' cy='70' r='45' fill='%234169E1'/%3E%3Cellipse cx='100' cy='150' r='40' ry='45' fill='%231E90FF'/%3E%3Ccircle cx='130' cy='58' r='12' fill='%23FFD700'/%3E%3Cpolygon points='115,50 122,43 120,54' fill='%23FF4500'/%3E%3Ccircle cx='85' cy='155' r='12' fill='%234169E1'/%3E%3Ccircle cx='115' cy='160' r='12' fill='%234169E1'/%3E%3C/svg%3E"
+            }
+        ];
+        
+        function renderProducts(filter = 'all') {
+            const container = document.getElementById('products');
+            const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
+            
+            container.innerHTML = filtered.map(product => `
+                <div class="product-card">
+                    ${product.badge ? `<div class="badge">${product.badge}</div>` : ''}
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}">
+                    </div>
+                    <div class="product-name">${product.name}</div>
+                    <div class="product-desc">${product.desc}</div>
+                    <div class="product-price">${product.price}</div>
+                    <button class="buy-btn" onclick="addToCart(${product.id}, '${product.name}', '${product.price}')">🛒 ADD TO CART</button>
+                </div>
+            `).join('');
+        }
+        
+        function filterProducts(category) {
+            renderProducts(category);
+        }
+        
+        function addToCart(id, name, price) {
+            cart.push({ id, name, price });
+            alert(`✅ ${name} added to cart! (${cart.length} items)`);
+        }
+        
+        function showCart() {
+            const modal = document.getElementById('cartModal');
+            const cartItems = document.getElementById('cartItems');
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p>Your cart is empty. Add some chickens!</p>';
+            } else {
+                const itemList = cart.map((item, index) => 
+                    `<div style="padding: 10px; background: #FFF; margin: 5px 0; border: 2px solid #000;">
+                        ${index + 1}. ${item.name} - ${item.price}
+                    </div>`
+                ).join('');
+                const total = cart.length;
+                cartItems.innerHTML = `${itemList}<p style="margin-top: 15px; font-weight: bold;">Total Items: ${total}</p>`;
+            }
+            
+            modal.style.display = 'block';
+        }
+        
+        function closeCart() {
+            document.getElementById('cartModal').style.display = 'none';
+        }
+        
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Please add some chickens first!');
+                return;
+            }
+            alert(`THANK YOU! Your order of ${cart.length} premium chickens will arrive in 3-5 business days! 🐓🚚`);
+            cart.length = 0;
+            closeCart();
+        }
+        
+        window.onclick = function(event) {
+            const modal = document.getElementById('cartModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+        
+        // Initialize
+        renderProducts();
+    </script>
+</body>
+</html>
